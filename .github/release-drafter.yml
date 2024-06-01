@@ -1,0 +1,13 @@
+name-template: 'v$NEXT_PATCH_VERSION'
+tag-template: 'v$NEXT_PATCH_VERSION'
+categories:
+  - title: '🚀 Features'
+    label: 'feature'
+  - title: '🐛 Bug Fixes'
+    label: 'bug'
+  - title: '🛠 Maintenance'
+    label: 'maintenance'
+change-template: '- $TITLE @${{ actor }} in #$NUMBER'
+template: |
+  ## Changes in this release:
+  $CHANGES

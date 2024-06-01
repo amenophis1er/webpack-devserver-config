@@ -1,4 +1,4 @@
-name: Publish to npm
+name: Publish to npm and create GitHub release
 
 on:
   push:
@@ -30,3 +30,34 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Get package version
+        id: get-version
+        run: echo "::set-output name=VERSION::$(node -p -e \"require('./package.json').version\")"
+
+      - name: Create GitHub Release
+        if: success()
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.get-version.outputs.VERSION }}
+          release_name: Release v${{ steps.get-version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+          body: ${{ steps.draft-release.outputs.body }}
+
+  draft-release:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Draft Release Notes
+        id: draft-release
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          version: v${{ steps.get-version.outputs.VERSION }}
