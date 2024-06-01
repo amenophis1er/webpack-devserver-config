@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "webpack serve --config webpack.config.js"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.6.0"
+  }
+}
