@@ -50,7 +50,7 @@ async function getAvailablePort(startPort, endPort, exclude = []) {
 async function setupDevServer(config, options) {
     const { port, phpServerDir, apiPrefix = 'api' } = options;
 
-    let phpServerPort = await getAvailablePort(9001, 10000, [port]);
+    let phpServerPort = await getAvailablePort(7430, 7860, [port]);
     let phpServer;
 
     const startPHPServer = async () => {
