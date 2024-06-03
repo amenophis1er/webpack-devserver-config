@@ -1,6 +1,6 @@
 {
   "name": "webpack-php-proxy-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Extends Webpack Dev Server to use PHP as a middleware, proxying /api requests to a PHP server",
   "main": "index.js",
   "dependencies": {
